@@ -1,4 +1,3 @@
-using System;
 using Photon.Pun;
 using UnityEngine;
 
@@ -6,16 +5,6 @@ public class Player : MonoBehaviourPun
 {
     private Rigidbody m_rigidbody;
     [SerializeField] private float m_moveSpeed;
-    [SerializeField] private GameObject m_camera;
-
-    private void Start()
-    {
-        m_rigidbody = GetComponent<Rigidbody>();
-        if (!photonView.IsMine)
-        {
-            m_camera.SetActive(false);
-        }
-    }
 
     private void Update()
     {

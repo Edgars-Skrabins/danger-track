@@ -5,15 +5,10 @@ using UnityEngine;
 public abstract class Card : MonoBehaviourPun
 {
     [SerializeField] protected TextMeshProUGUI m_priceText;
+    protected int m_originalPrice;
     protected int m_price;
-    protected Deck m_owningDeck;
     protected CardType m_type;
     protected MeshRenderer m_meshRenderer;
-
-    protected void SetCardColor()
-    {
-        m_meshRenderer.sharedMaterial = m_owningDeck.GetCardMaterial(m_type);
-    }
 
     public void OnMouseDown()
     {

@@ -11,18 +11,19 @@ using UnityEngine;
 
 public abstract class Deck : MonoBehaviourPun
 {
+    public event Action OnAllCardsPlaced;
     [SerializeField] private Transform[] m_cardSlots;
     [SerializeField] private CardMaterialMapping[] m_cardMaterials;
 
     private void Start()
     {
         PopulateDeck();
-        FillAllCardSlots();
+        PlaceAllCards();
     }
 
     public abstract void PopulateDeck();
 
-    public void FillAllCardSlots()
+    public void PlaceAllCards()
     {
         if (!PhotonNetwork.IsMasterClient)
         {
@@ -33,6 +34,8 @@ public abstract class Deck : MonoBehaviourPun
         {
             PlaceCardInSlot(cardSlot);
         }
+
+        OnAllCardsPlaced?.Invoke();
     }
 
     protected abstract void PlaceCardInSlot(Transform _cardSlot);

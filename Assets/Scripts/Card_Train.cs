@@ -3,7 +3,10 @@ using UnityEngine;
 
 public class Card_Train : Card
 {
-    public void Initialize(Deck _deck, TrainCardData _trainCard)
+    [SerializeField] private GameObject m_taxText;
+    private Deck_Train m_owningDeck;
+
+    public void Initialize(Deck_Train _deck, TrainCardData _trainCard)
     {
         photonView.RPC(
             nameof(InitializeRPC),
@@ -11,6 +14,11 @@ public class Card_Train : Card
             _deck.photonView.ViewID,
             _trainCard.cost,
             _trainCard.type);
+    }
+
+    private void SetCardColor()
+    {
+        m_meshRenderer.sharedMaterial = m_owningDeck.GetCardMaterial(m_type);
     }
 
     [PunRPC]
@@ -24,7 +32,9 @@ public class Card_Train : Card
             return;
         }
 
-        m_owningDeck = deckView.GetComponent<Deck>();
+        m_owningDeck = deckView.GetComponent<Deck_Train>();
+        m_owningDeck.OnAllCardsPlaced += UpdateTaxStatus;
+        m_originalPrice = _price;
         m_price = _price;
         m_type = _type;
 
@@ -32,6 +42,19 @@ public class Card_Train : Card
 
         m_meshRenderer ??= GetComponent<MeshRenderer>();
         SetCardColor();
+    }
+
+    private void UpdateTaxStatus()
+    {
+        if (m_owningDeck.GetFirstCardType() == m_type)
+        {
+            UpdatePrice(m_originalPrice + 1);
+            m_taxText.SetActive(true);
+            return;
+        }
+
+        m_taxText.SetActive(false);
+        UpdatePrice(m_originalPrice);
     }
 
     public void UpdatePrice(int _newPrice)
@@ -45,7 +68,7 @@ public class Card_Train : Card
     [PunRPC]
     private void UpdatePriceRPC(int _newPrice)
     {
-        m_price += _newPrice;
+        m_price = _newPrice;
         m_priceText.text = m_price.ToString();
     }
 }

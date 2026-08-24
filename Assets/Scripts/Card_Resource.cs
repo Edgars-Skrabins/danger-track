@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Card_Resource : Card
 {
+    private Deck_Resource m_owningDeck;
+
     public void Initialize(Deck _deck, ResourceCardData _trainCard)
     {
         photonView.RPC(
@@ -11,6 +13,11 @@ public class Card_Resource : Card
             _deck.photonView.ViewID,
             _trainCard.value,
             _trainCard.type);
+    }
+
+    private void SetCardColor()
+    {
+        m_meshRenderer.sharedMaterial = m_owningDeck.GetCardMaterial(m_type);
     }
 
     [PunRPC]
@@ -24,7 +31,7 @@ public class Card_Resource : Card
             return;
         }
 
-        m_owningDeck = deckView.GetComponent<Deck>();
+        m_owningDeck = deckView.GetComponent<Deck_Resource>();
         m_price = _price;
         m_type = _type;
 
