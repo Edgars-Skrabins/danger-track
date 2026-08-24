@@ -1,15 +1,15 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class Card_Train : Card
+public class Card_Resource : Card
 {
-    public void Initialize(Deck _deck, TrainCardData _trainCard)
+    public void Initialize(Deck _deck, ResourceCardData _trainCard)
     {
         photonView.RPC(
             nameof(InitializeRPC),
             RpcTarget.AllBuffered,
             _deck.photonView.ViewID,
-            _trainCard.cost,
+            _trainCard.value,
             _trainCard.type);
     }
 
@@ -32,20 +32,5 @@ public class Card_Train : Card
 
         m_meshRenderer ??= GetComponent<MeshRenderer>();
         SetCardColor();
-    }
-
-    public void UpdatePrice(int _newPrice)
-    {
-        photonView.RPC(
-            nameof(UpdatePriceRPC),
-            RpcTarget.All,
-            _newPrice);
-    }
-
-    [PunRPC]
-    private void UpdatePriceRPC(int _newPrice)
-    {
-        m_price += _newPrice;
-        m_priceText.text = m_price.ToString();
     }
 }

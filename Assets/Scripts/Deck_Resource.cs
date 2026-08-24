@@ -3,11 +3,12 @@ using Photon.Pun;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Deck_Train : Deck
+
+public class Deck_Resource : Deck
 {
-    [SerializeField] private Card_Train m_trainCard;
-    [SerializeField] private TrainDeckCardPool m_deckCardPool;
-    private readonly List<TrainCardData> m_cardsInDeck = new List<TrainCardData>();
+    [SerializeField] private Card_Resource m_resourceCard;
+    [SerializeField] private ResourceDeckCardPool m_deckCardPool;
+    private readonly List<ResourceCardData> m_cardsInDeck = new List<ResourceCardData>();
 
     public override void PopulateDeck()
     {
@@ -17,7 +18,7 @@ public class Deck_Train : Deck
         }
 
         m_cardsInDeck.Clear();
-        foreach (TrainDeckContent deckContent in m_deckCardPool.contents)
+        foreach (ResourceDeckContent deckContent in m_deckCardPool.contents)
         {
             for (int i = 0; i < deckContent.amount; i++)
             {
@@ -34,15 +35,15 @@ public class Deck_Train : Deck
         }
 
         int randomIndex = Random.Range(0, m_cardsInDeck.Count);
-        TrainCardData randomCard = m_cardsInDeck[randomIndex];
+        ResourceCardData randomCard = m_cardsInDeck[randomIndex];
         m_cardsInDeck.RemoveAt(randomIndex);
 
         GameObject cardObject = PhotonNetwork.Instantiate(
-            m_trainCard.name,
+            m_resourceCard.name,
             _cardSlot.position,
             _cardSlot.rotation);
 
-        Card_Train card = cardObject.GetComponent<Card_Train>();
+        Card_Resource card = cardObject.GetComponent<Card_Resource>();
         card.Initialize(this, randomCard);
     }
 }
