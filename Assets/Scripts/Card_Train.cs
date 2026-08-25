@@ -6,17 +6,17 @@ public class Card_Train : Card
     [SerializeField] private GameObject m_taxText;
     private Deck_Train m_owningDeck;
 
-    public void Initialize(Deck_Train _deck, TrainCardData _trainCard)
+    public override void Initialize(Deck _deck, CardData _cardData)
     {
         photonView.RPC(
             nameof(InitializeRPC),
             RpcTarget.AllBuffered,
             _deck.photonView.ViewID,
-            _trainCard.cost,
-            _trainCard.type);
+            _cardData.numericValue,
+            _cardData.type);
     }
 
-    private void SetCardColor()
+    protected override void SetCardColor()
     {
         m_meshRenderer.sharedMaterial = m_owningDeck.GetCardMaterial(m_type);
     }

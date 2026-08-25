@@ -10,6 +10,10 @@ public abstract class Card : MonoBehaviourPun
     protected CardType m_type;
     protected MeshRenderer m_meshRenderer;
 
+    public abstract void Initialize(Deck _deck, CardData _cardData);
+
+    protected abstract void SetCardColor();
+
     public void OnMouseDown()
     {
         Debug.Log("OnMouseDown");

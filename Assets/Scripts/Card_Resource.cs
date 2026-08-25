@@ -5,17 +5,17 @@ public class Card_Resource : Card
 {
     private Deck_Resource m_owningDeck;
 
-    public void Initialize(Deck _deck, ResourceCardData _trainCard)
+    public override void Initialize(Deck _deck, CardData _cardData)
     {
         photonView.RPC(
             nameof(InitializeRPC),
             RpcTarget.AllBuffered,
             _deck.photonView.ViewID,
-            _trainCard.value,
-            _trainCard.type);
+            _cardData.numericValue,
+            _cardData.type);
     }
 
-    private void SetCardColor()
+    protected override void SetCardColor()
     {
         m_meshRenderer.sharedMaterial = m_owningDeck.GetCardMaterial(m_type);
     }
