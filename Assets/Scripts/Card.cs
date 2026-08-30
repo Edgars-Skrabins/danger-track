@@ -2,35 +2,20 @@ using Photon.Pun;
 using TMPro;
 using UnityEngine;
 
-public abstract class Card : MonoBehaviourPun
+public abstract class Card : MonoBehaviourPun, IInteractable
 {
     [SerializeField] protected TextMeshProUGUI m_priceText;
     protected int m_originalPrice;
     protected int m_price;
-    protected ResourceType m_type;
+    protected ResourceType m_resourceType;
     protected MeshRenderer m_meshRenderer;
 
     public abstract void Initialize(Deck _deck, CardData _cardData);
 
     protected abstract void SetCardColor();
 
-    public void OnMouseDown()
-    {
-        Debug.Log("OnMouseDown");
-    }
+    public abstract void HandleMouseOver();
 
-    public void OnMouseUp()
-    {
-        Debug.Log("OnMouseUp");
-    }
-
-    public void OnMouseEnter()
-    {
-        Debug.Log("OnMouseEnter");
-    }
-
-    public void OnMouseUpAsButton()
-    {
-        Debug.Log("OnMouseUpAsButton");
-    }
+    public abstract void AttemptInteract(Player _interactor);
+    protected abstract void Interact(Player _interactor);
 }

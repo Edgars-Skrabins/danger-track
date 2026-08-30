@@ -18,7 +18,7 @@ public class Card_Train : Card
 
     protected override void SetCardColor()
     {
-        m_meshRenderer.sharedMaterial = m_owningDeck.GetCardMaterial(m_type);
+        m_meshRenderer.sharedMaterial = m_owningDeck.GetCardMaterial(m_resourceType);
     }
 
     [PunRPC]
@@ -36,7 +36,7 @@ public class Card_Train : Card
         m_owningDeck.OnAllCardsPlaced += UpdateTaxStatus;
         m_originalPrice = _price;
         m_price = _price;
-        m_type = _type;
+        m_resourceType = _type;
 
         m_priceText.text = m_price.ToString();
 
@@ -46,7 +46,7 @@ public class Card_Train : Card
 
     private void UpdateTaxStatus()
     {
-        if (m_owningDeck.GetFirstCardType() == m_type)
+        if (m_owningDeck.GetFirstCardType() == m_resourceType)
         {
             UpdatePrice(m_originalPrice + 1);
             m_taxText.SetActive(true);
