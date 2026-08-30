@@ -7,7 +7,7 @@ public abstract class Card : MonoBehaviourPun
     [SerializeField] protected TextMeshProUGUI m_priceText;
     protected int m_originalPrice;
     protected int m_price;
-    protected CardType m_type;
+    protected ResourceType m_type;
     protected MeshRenderer m_meshRenderer;
 
     public abstract void Initialize(Deck _deck, CardData _cardData);

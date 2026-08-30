@@ -5,7 +5,7 @@ using UnityEngine;
 
 [Serializable] public class CardMaterialMapping
 {
-    public CardType type;
+    public ResourceType type;
     public Material material;
 }
 
@@ -40,7 +40,7 @@ public abstract class Deck : MonoBehaviourPun
 
     protected abstract void PlaceCardInSlot(Transform _cardSlot);
 
-    public Material GetCardMaterial(CardType type)
+    public Material GetCardMaterial(ResourceType type)
     {
         return m_cardMaterials.First(x => x.type == type).material;
     }

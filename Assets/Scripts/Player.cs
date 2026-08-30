@@ -1,30 +1,33 @@
+using System;
 using Photon.Pun;
 using UnityEngine;
 
 public class Player : MonoBehaviourPun
 {
-    private Rigidbody m_rigidbody;
-    [SerializeField] private float m_moveSpeed;
+    public event Action OnResourceUpdate;
+    [SerializeField] private Camera m_camera;
+    [SerializeField] private Canvas m_canvas;
 
-    private void Update()
+    private void Start()
     {
         if (!photonView.IsMine)
         {
-            return;
+            m_camera.gameObject.SetActive(false);
+            m_canvas.gameObject.SetActive(false);
         }
-
-        Move();
     }
 
-    private void Move()
+    private readonly int[] m_resources = new int[(int)ResourceType.Count];
+
+    public void AddResource(ResourceType _resourceType, int _amount = 1)
     {
-        float movementX = Input.GetAxis("Horizontal");
-        float movementZ = Input.GetAxis("Vertical");
+        m_resources[(int)_resourceType] += _amount;
+        OnResourceUpdate?.Invoke();
+    }
 
-        Vector3 movement = new Vector3(movementX, 0f, movementZ).normalized;
-
-        m_rigidbody.MovePosition(
-            m_rigidbody.position + movement * (m_moveSpeed * Time.deltaTime)
-        );
+    public int GetResource(ResourceType resourceType)
+    {
+        return m_resources[(int)resourceType];
+        OnResourceUpdate?.Invoke();
     }
 }

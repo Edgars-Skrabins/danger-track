@@ -1,4 +1,4 @@
-public enum CardType
+public enum ResourceType
 {
     Red,
     Orange,
@@ -6,4 +6,6 @@ public enum CardType
     Purple,
     Green,
     Gold,
+
+    Count,
 }

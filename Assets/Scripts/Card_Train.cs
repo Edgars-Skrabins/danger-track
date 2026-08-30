@@ -22,7 +22,7 @@ public class Card_Train : Card
     }
 
     [PunRPC]
-    private void InitializeRPC(int _deckViewId, int _price, CardType _type)
+    private void InitializeRPC(int _deckViewId, int _price, ResourceType _type)
     {
         PhotonView deckView = PhotonView.Find(_deckViewId);
 

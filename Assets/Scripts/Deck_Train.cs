@@ -52,12 +52,12 @@ public class Deck_Train : Deck
         card.Initialize(this, cardData);
     }
 
-    public CardType GetLastCardType()
+    public ResourceType GetLastCardType()
     {
         return m_placedCards.Count == 0 ? default : m_placedCards[0].type;
     }
 
-    public CardType GetFirstCardType()
+    public ResourceType GetFirstCardType()
     {
         return m_placedCards.Count == 0 ? default : m_placedCards[^1].type;
     }
