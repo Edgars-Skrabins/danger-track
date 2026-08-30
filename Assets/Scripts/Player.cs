@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviourPun
 {
-    public event Action OnResourceUpdate;
+    public event Action<ResourceType> OnResourceUpdate;
     [SerializeField] private Camera m_camera;
     public Camera GetCamera() => m_camera;
 
@@ -24,12 +24,11 @@ public class Player : MonoBehaviourPun
     public void AddResource(ResourceType _resourceType, int _amount = 1)
     {
         m_resources[(int)_resourceType] += _amount;
-        OnResourceUpdate?.Invoke();
+        OnResourceUpdate?.Invoke(_resourceType);
     }
 
     public int GetResource(ResourceType resourceType)
     {
         return m_resources[(int)resourceType];
-        OnResourceUpdate?.Invoke();
     }
 }

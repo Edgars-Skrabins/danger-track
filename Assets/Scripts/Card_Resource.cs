@@ -43,7 +43,7 @@ public class Card_Resource : Card
 
     public override void HandleMouseOver()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void AttemptInteract(Player _interactor)

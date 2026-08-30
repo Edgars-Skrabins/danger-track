@@ -21,6 +21,18 @@ public class Card_Train : Card
         m_meshRenderer.sharedMaterial = m_owningDeck.GetCardMaterial(m_resourceType);
     }
 
+    public override void HandleMouseOver()
+    {
+    }
+
+    public override void AttemptInteract(Player _interactor)
+    {
+    }
+
+    protected override void Interact(Player _interactor)
+    {
+    }
+
     [PunRPC]
     private void InitializeRPC(int _deckViewId, int _price, ResourceType _type)
     {

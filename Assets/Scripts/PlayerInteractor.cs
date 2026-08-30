@@ -31,6 +31,7 @@ public class PlayerInteractor : MonoBehaviourPun
 
         if (Input.GetMouseButtonDown(0))
         {
+            Debug.Log("Click interactable");
             m_currentInteractable.AttemptInteract(m_player);
         }
     }
@@ -68,6 +69,7 @@ public class PlayerInteractor : MonoBehaviourPun
             return;
         }
 
+        Debug.Log("Interactable found and set");
         m_currentInteractable = _interactable;
     }
 }

@@ -1373,6 +1373,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerUI
   m_player: {fileID: 6531498569106691039}
+  m_resourceUIObject:
+  - resourceType: 0
+    textComponent: {fileID: 6984310090689883433}
+  - resourceType: 2
+    textComponent: {fileID: 4162706277753910218}
+  - resourceType: 1
+    textComponent: {fileID: 7515802051904668785}
+  - resourceType: 3
+    textComponent: {fileID: 6799960127835195371}
+  - resourceType: 4
+    textComponent: {fileID: 5293131823857171946}
+  - resourceType: 5
+    textComponent: {fileID: 1545553224970998268}
 --- !u!1 &6337043002343648678
 GameObject:
   m_ObjectHideFlags: 0
@@ -1960,6 +1973,7 @@ GameObject:
   - component: {fileID: 1656286828637723251}
   - component: {fileID: 6531498569106691039}
   - component: {fileID: 6583166777839634037}
+  - component: {fileID: 8675140272560481355}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2010,6 +2024,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891438f6c2f20244a9d0822d2bb2592f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  m_player: {fileID: 6531498569106691039}
+  m_raycastLayers:
+    serializedVersion: 2
+    m_Bits: 51
+--- !u!114 &8675140272560481355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8050690089630880621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonView
+  ObservedComponentsFoldoutOpen: 0
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &8807928298446075441
 GameObject:
   m_ObjectHideFlags: 0
