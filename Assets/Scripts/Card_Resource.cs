@@ -20,9 +20,9 @@ public class Card_Resource : Card
     {
         PhotonView deckView = PhotonView.Find(_deckViewId);
 
-        if (deckView == null)
+        if (!deckView)
         {
-            Debug.LogError($"Could not find Deck PhotonView with ID {_deckViewId}.");
+            ErrorHandler.HandlePhotonViewNotFound(_deckViewId);
             return;
         }
 
@@ -54,7 +54,7 @@ public class Card_Resource : Card
     protected override void Interact(Player _interactor)
     {
         photonView.RPC(
-            nameof(InitializeRPC),
+            nameof(InteractRPC),
             RpcTarget.AllBuffered,
             _interactor.photonView.ViewID);
     }
@@ -64,9 +64,9 @@ public class Card_Resource : Card
     {
         PhotonView playerView = PhotonView.Find(_playerViewId);
 
-        if (playerView == null)
+        if (!playerView)
         {
-            Debug.LogError($"Could not find Deck PhotonView with ID {_playerViewId}.");
+            ErrorHandler.HandlePhotonViewNotFound(_playerViewId);
             return;
         }
 
