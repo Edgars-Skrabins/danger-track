@@ -75,5 +75,6 @@ public class Card_Resource : Card
             _player.AddResource(m_resourceType, m_price);
         }
 
+        Destroy(gameObject);
     }
 }
