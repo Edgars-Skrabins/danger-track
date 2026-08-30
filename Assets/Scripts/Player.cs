@@ -6,6 +6,8 @@ public class Player : MonoBehaviourPun
 {
     public event Action OnResourceUpdate;
     [SerializeField] private Camera m_camera;
+    public Camera GetCamera() => m_camera;
+
     [SerializeField] private Canvas m_canvas;
 
     private void Start()
