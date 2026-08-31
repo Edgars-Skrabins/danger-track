@@ -3,12 +3,13 @@ using Photon.Pun;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-
 public class Deck_Resource : Deck
 {
     [SerializeField] private Card_Resource m_resourceCard;
     [SerializeField] private ResourceDeckCardPool m_deckCardPool;
-    private readonly List<ResourceCardData> m_cardsInDeck = new List<ResourceCardData>();
+
+    private readonly List<ResourceCardData> m_cardsInDeck = new();
+    private readonly List<ResourceCardData> m_placedCards = new();
 
     public override void PopulateDeck()
     {
@@ -18,6 +19,8 @@ public class Deck_Resource : Deck
         }
 
         m_cardsInDeck.Clear();
+        m_placedCards.Clear();
+
         foreach (ResourceDeckContent deckContent in m_deckCardPool.contents)
         {
             for (int i = 0; i < deckContent.amount; i++)
@@ -27,7 +30,7 @@ public class Deck_Resource : Deck
         }
     }
 
-    protected override void PlaceCardInSlot(Transform _cardSlot)
+    protected override void PlaceCardInSlot(Transform _cardSlot, int _slotIndex)
     {
         if (m_cardsInDeck.Count == 0)
         {
@@ -35,8 +38,16 @@ public class Deck_Resource : Deck
         }
 
         int randomIndex = Random.Range(0, m_cardsInDeck.Count);
-        ResourceCardData randomCard = m_cardsInDeck[randomIndex];
+        ResourceCardData cardData = m_cardsInDeck[randomIndex];
+
         m_cardsInDeck.RemoveAt(randomIndex);
+
+        while (m_placedCards.Count <= _slotIndex)
+        {
+            m_placedCards.Add(null);
+        }
+
+        m_placedCards[_slotIndex] = cardData;
 
         GameObject cardObject = PhotonNetwork.Instantiate(
             m_resourceCard.name,
@@ -44,6 +55,31 @@ public class Deck_Resource : Deck
             _cardSlot.rotation);
 
         Card_Resource card = cardObject.GetComponent<Card_Resource>();
-        card.Initialize(this, randomCard);
+
+        card.OnCardRemoved += () => RemoveCardFromSlot(_slotIndex, cardData);
+
+        card.Initialize(this, cardData);
+    }
+
+    protected override bool IsSlotOccupied(int _slotIndex)
+    {
+        return _slotIndex >= 0 &&
+               _slotIndex < m_placedCards.Count &&
+               m_placedCards[_slotIndex] != null;
+    }
+
+    private void RemoveCardFromSlot(int _slotIndex, ResourceCardData _cardData)
+    {
+        if (_slotIndex < 0 || _slotIndex >= m_placedCards.Count)
+        {
+            return;
+        }
+
+        if (m_placedCards[_slotIndex] != _cardData)
+        {
+            return;
+        }
+
+        m_placedCards[_slotIndex] = null;
     }
 }

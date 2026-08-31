@@ -30,7 +30,7 @@ public class Deck_Train : Deck
         }
     }
 
-    protected override void PlaceCardInSlot(Transform _cardSlot)
+    protected override void PlaceCardInSlot(Transform _cardSlot, int _slotIndex)
     {
         if (m_cardsInDeck.Count == 0)
         {
@@ -41,7 +41,13 @@ public class Deck_Train : Deck
         TrainCardData cardData = m_cardsInDeck[randomIndex];
 
         m_cardsInDeck.RemoveAt(randomIndex);
-        m_placedCards.Insert(0, cardData);
+
+        while (m_placedCards.Count <= _slotIndex)
+        {
+            m_placedCards.Add(null);
+        }
+
+        m_placedCards[_slotIndex] = cardData;
 
         GameObject cardObject = PhotonNetwork.Instantiate(
             m_trainCard.name,
@@ -49,17 +55,58 @@ public class Deck_Train : Deck
             _cardSlot.rotation);
 
         Card_Train card = cardObject.GetComponent<Card_Train>();
+
+        card.OnCardRemoved += () => RemoveCardFromSlot(_slotIndex, cardData);
+
         card.Initialize(this, cardData);
+    }
+
+    protected override bool IsSlotOccupied(int _slotIndex)
+    {
+        return _slotIndex >= 0 &&
+               _slotIndex < m_placedCards.Count &&
+               m_placedCards[_slotIndex] != null;
+    }
+
+    private void RemoveCardFromSlot(int _slotIndex, TrainCardData _cardData)
+    {
+        if (_slotIndex < 0 || _slotIndex >= m_placedCards.Count)
+        {
+            return;
+        }
+
+        if (m_placedCards[_slotIndex] != _cardData)
+        {
+            return;
+        }
+
+        m_placedCards[_slotIndex] = null;
     }
 
     public ResourceType GetLastCardType()
     {
-        return m_placedCards.Count == 0 ? default : m_placedCards[0].type;
+        for (int i = m_placedCards.Count - 1; i >= 0; i--)
+        {
+            if (m_placedCards[i] != null)
+            {
+                return m_placedCards[i].type;
+            }
+        }
+
+        return default;
     }
 
     public ResourceType GetFirstCardType()
     {
-        return m_placedCards.Count == 0 ? default : m_placedCards[^1].type;
+        for (int i = 0; i < m_placedCards.Count; i++)
+        {
+            if (m_placedCards[i] != null)
+            {
+                return m_placedCards[i].type;
+            }
+        }
+
+        return default;
     }
 
     public TrainCardData GetCardAtSlot(int _slotIndex)

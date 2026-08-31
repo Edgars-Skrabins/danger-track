@@ -1,3 +1,4 @@
+using System;
 using Photon.Pun;
 using UnityEngine;
 
@@ -46,6 +47,12 @@ public class Card_Resource : Card
 
     }
 
+    protected override bool CanInteract(Player _interactor)
+    {
+        return true;
+    }
+
+
     public override void AttemptInteract(Player _interactor)
     {
         Interact(_interactor);
@@ -75,6 +82,10 @@ public class Card_Resource : Card
             _player.AddResource(m_resourceType, m_price);
         }
 
-        Destroy(gameObject);
+        RemoveCard();
+        if (m_resourceType == ResourceType.Gold)
+        {
+            TurnManager.I.StartNextTurn();
+        }
     }
 }

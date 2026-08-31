@@ -9,9 +9,10 @@ public class Player : MonoBehaviourPun
     public Camera GetCamera() => m_camera;
 
     [SerializeField] private Canvas m_canvas;
-
+    
     private void Start()
     {
+        PlayerManager.I.RegisterPlayer(photonView);
         if (!photonView.IsMine)
         {
             m_camera.gameObject.SetActive(false);
@@ -30,5 +31,15 @@ public class Player : MonoBehaviourPun
     public int GetResource(ResourceType resourceType)
     {
         return m_resources[(int)resourceType];
+    }
+
+    public void RemoveResource(ResourceType _resourceType, int amount)
+    {
+        m_resources[(int)_resourceType] -= amount;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerManager.I.UnregisterPlayer(photonView);
     }
 }

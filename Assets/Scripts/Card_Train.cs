@@ -1,3 +1,4 @@
+using System;
 using Photon.Pun;
 using UnityEngine;
 
@@ -25,12 +26,46 @@ public class Card_Train : Card
     {
     }
 
+    protected override bool CanInteract(Player _interactor)
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void AttemptInteract(Player _interactor)
     {
+        if (_interactor.GetResource(m_resourceType) >= m_price)
+        {
+            _interactor.RemoveResource(m_resourceType, m_price);
+            Interact(_interactor);
+        }
     }
 
     protected override void Interact(Player _interactor)
     {
+        photonView.RPC(
+            nameof(InteractRPC),
+            RpcTarget.AllBuffered,
+            _interactor.photonView.ViewID);
+    }
+
+    [PunRPC]
+    private void InteractRPC(int _playerViewId)
+    {
+        PhotonView playerView = PhotonView.Find(_playerViewId);
+
+        if (!playerView)
+        {
+            ErrorHandler.HandlePhotonViewNotFound(_playerViewId);
+            return;
+        }
+
+        if(playerView.TryGetComponent(out Player _player))
+        {
+            _player.AddResource(m_resourceType, m_price);
+        }
+
+        RemoveCard();
+        TurnManager.I.StartNextTurn();
     }
 
     [PunRPC]

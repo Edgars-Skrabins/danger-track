@@ -11,7 +11,7 @@ public class PlayerInteractor : MonoBehaviourPun
 
     private void Update()
     {
-        if (!photonView.IsMine)
+        if (!photonView.IsMine || !TurnManager.I.IsMyTurn(m_player.photonView.ViewID))
         {
             return;
         }
@@ -27,11 +27,12 @@ public class PlayerInteractor : MonoBehaviourPun
             return;
         }
 
+        Debug.Log("interactable:" + m_currentInteractable);
+
         m_currentInteractable.HandleMouseOver();
 
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Click interactable");
             m_currentInteractable.AttemptInteract(m_player);
         }
     }
@@ -59,7 +60,10 @@ public class PlayerInteractor : MonoBehaviourPun
         if (_hit.collider.TryGetComponent(out IInteractable _interactable))
         {
             HandleInteractableFound(_interactable);
+            return;
         }
+
+        m_currentInteractable = null;
     }
 
     private void HandleInteractableFound(IInteractable _interactable)
@@ -69,7 +73,6 @@ public class PlayerInteractor : MonoBehaviourPun
             return;
         }
 
-        Debug.Log("Interactable found and set");
         m_currentInteractable = _interactable;
     }
 }

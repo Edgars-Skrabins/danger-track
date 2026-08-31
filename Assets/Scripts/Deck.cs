@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Photon.Pun;
 using UnityEngine;
@@ -17,6 +18,7 @@ public abstract class Deck : MonoBehaviourPun
 
     private void Start()
     {
+        TurnManager.I.OnTurnOwnerChange += PopulateDeck;
         PopulateDeck();
         PlaceAllCards();
     }
@@ -30,15 +32,19 @@ public abstract class Deck : MonoBehaviourPun
             return;
         }
 
-        foreach (Transform cardSlot in m_cardSlots)
+        for (int i = 0; i < m_cardSlots.Length; i++)
         {
-            PlaceCardInSlot(cardSlot);
+            if (IsSlotOccupied(i))
+            {
+                continue;
+            }
+            PlaceCardInSlot(m_cardSlots[i], i);
         }
-
         OnAllCardsPlaced?.Invoke();
     }
 
-    protected abstract void PlaceCardInSlot(Transform _cardSlot);
+    protected abstract void PlaceCardInSlot(Transform _cardSlot, int _slotIndex);
+    protected abstract bool IsSlotOccupied(int _slotIndex);
 
     public Material GetCardMaterial(ResourceType type)
     {
