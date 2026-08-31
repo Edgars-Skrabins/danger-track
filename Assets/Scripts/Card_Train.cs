@@ -93,6 +93,7 @@ public class Card_Train : Card
 
     private void UpdateTaxStatus()
     {
+        return;
         if (m_owningDeck.GetFirstCardType() == m_resourceType)
         {
             UpdatePrice(m_originalPrice + 1);

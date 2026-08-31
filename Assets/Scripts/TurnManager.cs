@@ -22,7 +22,7 @@ public class TurnManager : NetworkedSingleton<TurnManager>
         }
 
         List<PhotonView> playerList = PlayerManager.I.GetSpawnedPlayerPhotonViews();
-        if (playerList[m_turnIndex] == null)
+        if (playerList.Count <= m_turnIndex)
         {
             m_turnIndex = 0;
         }

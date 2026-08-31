@@ -27,8 +27,6 @@ public class PlayerInteractor : MonoBehaviourPun
             return;
         }
 
-        Debug.Log("interactable:" + m_currentInteractable);
-
         m_currentInteractable.HandleMouseOver();
 
         if (Input.GetMouseButtonDown(0))

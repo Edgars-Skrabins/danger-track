@@ -18,7 +18,7 @@ public abstract class Deck : MonoBehaviourPun
 
     private void Start()
     {
-        TurnManager.I.OnTurnOwnerChange += PopulateDeck;
+        TurnManager.I.OnTurnOwnerChange += PlaceAllCards;
         PopulateDeck();
         PlaceAllCards();
     }
