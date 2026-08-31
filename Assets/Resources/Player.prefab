@@ -1269,7 +1269,7 @@ GameObject:
   - component: {fileID: 8808788902151213953}
   - component: {fileID: 8213932593056634017}
   - component: {fileID: 1211360008413341761}
-  - component: {fileID: 4058028481429863915}
+  - component: {fileID: 6227161413041582178}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1360,7 +1360,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4058028481429863915
+--- !u!114 &6227161413041582178
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1369,10 +1369,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6271101219438683462}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7422cb3d530483e48979ca5898ebf5b1, type: 3}
+  m_Script: {fileID: 11500000, guid: c8d06b477e797914d9507a5da4c9097e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerUI
-  m_player: {fileID: 6531498569106691039}
+  m_player: {fileID: 1967915522879915606}
   m_resourceUIObject:
   - resourceType: 0
     textComponent: {fileID: 6984310090689883433}
@@ -1971,9 +1971,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1656286828637723251}
-  - component: {fileID: 6531498569106691039}
-  - component: {fileID: 6583166777839634037}
   - component: {fileID: 8675140272560481355}
+  - component: {fileID: 1967915522879915606}
+  - component: {fileID: 6023598327541601970}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1998,36 +1998,6 @@ Transform:
   - {fileID: 3055593030728724626}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6531498569106691039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8050690089630880621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e5ade301931f4437be64f945bd3845a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Player
-  m_camera: {fileID: 7179503657041311711}
-  m_canvas: {fileID: 8808788902151213953}
---- !u!114 &6583166777839634037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8050690089630880621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 891438f6c2f20244a9d0822d2bb2592f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  m_player: {fileID: 6531498569106691039}
-  m_raycastLayers:
-    serializedVersion: 2
-    m_Bits: 51
 --- !u!114 &8675140272560481355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2050,6 +2020,36 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1967915522879915606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8050690089630880621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 426178d50f09c0f4d9985582c66016f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
+  m_camera: {fileID: 7179503657041311711}
+  m_canvas: {fileID: 8808788902151213953}
+--- !u!114 &6023598327541601970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8050690089630880621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e83a7f47c35266479270c2ce837d307, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractor
+  m_player: {fileID: 1967915522879915606}
+  m_raycastLayers:
+    serializedVersion: 2
+    m_Bits: 51
 --- !u!1 &8807928298446075441
 GameObject:
   m_ObjectHideFlags: 0

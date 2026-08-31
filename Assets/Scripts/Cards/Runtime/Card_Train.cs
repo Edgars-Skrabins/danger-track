@@ -1,8 +1,7 @@
-using System;
 using Photon.Pun;
 using UnityEngine;
 
-public class Card_Train : Card
+public partial class Card_Train : Card
 {
     [SerializeField] private GameObject m_taxText;
     private Deck_Train m_owningDeck;
@@ -22,9 +21,7 @@ public class Card_Train : Card
         m_meshRenderer.sharedMaterial = m_owningDeck.GetCardMaterial(m_resourceType);
     }
 
-    public override void HandleMouseOver()
-    {
-    }
+    public override void HandleMouseOver() { }
 
     protected override bool CanInteract(Player _interactor)
     {
@@ -48,47 +45,12 @@ public class Card_Train : Card
             _interactor.photonView.ViewID);
     }
 
-    [PunRPC]
-    private void InteractRPC(int _playerViewId)
+    public void UpdatePrice(int _newPrice)
     {
-        PhotonView playerView = PhotonView.Find(_playerViewId);
-
-        if (!playerView)
-        {
-            ErrorHandler.HandlePhotonViewNotFound(_playerViewId);
-            return;
-        }
-
-        if(playerView.TryGetComponent(out Player _player))
-        {
-            _player.AddResource(m_resourceType, m_price);
-        }
-
-        RemoveCard();
-        TurnManager.I.StartNextTurn();
-    }
-
-    [PunRPC]
-    private void InitializeRPC(int _deckViewId, int _price, ResourceType _type)
-    {
-        PhotonView deckView = PhotonView.Find(_deckViewId);
-
-        if (deckView == null)
-        {
-            Debug.LogError($"Could not find Deck PhotonView with ID {_deckViewId}.");
-            return;
-        }
-
-        m_owningDeck = deckView.GetComponent<Deck_Train>();
-        m_owningDeck.OnAllCardsPlaced += UpdateTaxStatus;
-        m_originalPrice = _price;
-        m_price = _price;
-        m_resourceType = _type;
-
-        m_priceText.text = m_price.ToString();
-
-        m_meshRenderer ??= GetComponent<MeshRenderer>();
-        SetCardColor();
+        photonView.RPC(
+            nameof(UpdatePriceRPC),
+            RpcTarget.All,
+            _newPrice);
     }
 
     private void UpdateTaxStatus()
@@ -103,20 +65,5 @@ public class Card_Train : Card
 
         m_taxText.SetActive(false);
         UpdatePrice(m_originalPrice);
-    }
-
-    public void UpdatePrice(int _newPrice)
-    {
-        photonView.RPC(
-            nameof(UpdatePriceRPC),
-            RpcTarget.All,
-            _newPrice);
-    }
-
-    [PunRPC]
-    private void UpdatePriceRPC(int _newPrice)
-    {
-        m_price = _newPrice;
-        m_priceText.text = m_price.ToString();
     }
 }

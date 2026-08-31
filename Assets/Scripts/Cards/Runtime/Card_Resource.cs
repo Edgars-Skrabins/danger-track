@@ -1,8 +1,7 @@
-using System;
 using Photon.Pun;
 using UnityEngine;
 
-public class Card_Resource : Card
+public partial class Card_Resource : Card
 {
     private Deck_Resource m_owningDeck;
 
@@ -16,42 +15,14 @@ public class Card_Resource : Card
             _cardData.type);
     }
 
-    [PunRPC]
-    private void InitializeRPC(int _deckViewId, int _price, ResourceType _type)
-    {
-        PhotonView deckView = PhotonView.Find(_deckViewId);
-
-        if (!deckView)
-        {
-            ErrorHandler.HandlePhotonViewNotFound(_deckViewId);
-            return;
-        }
-
-        m_owningDeck = deckView.GetComponent<Deck_Resource>();
-        m_price = _price;
-        m_resourceType = _type;
-
-        m_priceText.text = m_price.ToString();
-
-        m_meshRenderer ??= GetComponent<MeshRenderer>();
-        SetCardColor();
-    }
-
     protected override void SetCardColor()
     {
         m_meshRenderer.sharedMaterial = m_owningDeck.GetCardMaterial(m_resourceType);
     }
 
-    public override void HandleMouseOver()
-    {
+    public override void HandleMouseOver() { }
 
-    }
-
-    protected override bool CanInteract(Player _interactor)
-    {
-        return true;
-    }
-
+    protected override bool CanInteract(Player _interactor) => true;
 
     public override void AttemptInteract(Player _interactor)
     {
@@ -64,28 +35,5 @@ public class Card_Resource : Card
             nameof(InteractRPC),
             RpcTarget.AllBuffered,
             _interactor.photonView.ViewID);
-    }
-
-    [PunRPC]
-    private void InteractRPC(int _playerViewId)
-    {
-        PhotonView playerView = PhotonView.Find(_playerViewId);
-
-        if (!playerView)
-        {
-            ErrorHandler.HandlePhotonViewNotFound(_playerViewId);
-            return;
-        }
-
-        if(playerView.TryGetComponent(out Player _player))
-        {
-            _player.AddResource(m_resourceType, m_price);
-        }
-
-        RemoveCard();
-        if (m_resourceType == ResourceType.Gold)
-        {
-            TurnManager.I.StartNextTurn();
-        }
     }
 }

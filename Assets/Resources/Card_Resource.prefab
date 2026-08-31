@@ -61,15 +61,15 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 806561014158557363, guid: db3e6e1ee832b4af79efcaf40a774437, type: 3}
-      insertIndex: 4
-      addedObject: {fileID: 5890904904372136740}
+      insertIndex: -1
+      addedObject: {fileID: 1259795427790971262}
   m_SourcePrefab: {fileID: 100100000, guid: db3e6e1ee832b4af79efcaf40a774437, type: 3}
 --- !u!1 &4068150370944098749 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 806561014158557363, guid: db3e6e1ee832b4af79efcaf40a774437, type: 3}
   m_PrefabInstance: {fileID: 3694503987067134222}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5890904904372136740
+--- !u!114 &1259795427790971262
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -78,9 +78,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4068150370944098749}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f521c4d87896485698f85f5dd8ee141, type: 3}
+  m_Script: {fileID: 11500000, guid: e6786ba0825c33b4fa27dd8d2b2b1952, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::Card_Resource
   m_priceText: {fileID: 8102209923272482874}
 --- !u!114 &8102209923272482874 stripped
 MonoBehaviour:
