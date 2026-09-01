@@ -33,15 +33,11 @@ public partial class TurnManager : NetworkedSingleton<TurnManager>
         if (!PhotonNetwork.IsMasterClient) return;
 
         m_turnHistory.Add(m_currentTurnContext);
-        m_currentTurnContext = new TurnContext();
-        m_allowedTurnActions.Reset();
 
         List<PhotonView> playerList = PlayerManager.I.GetSpawnedPlayerPhotonViews();
 
         if (playerList.Count <= m_turnIndex)
-        {
             m_turnIndex = 0;
-        }
 
         SetTurnOwner(playerList[m_turnIndex]);
         m_turnIndex++;
