@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TrainCardEndsRoundRule : MonoBehaviour, ICardTrainPickupRule
 {
-    public void OnTrainCardPickup(CardType _cardType)
+    public void OnTrainCardPickup(ResourceType _type)
     {
         TurnManager.I.EndTurn();
     }

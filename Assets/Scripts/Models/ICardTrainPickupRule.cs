@@ -1,4 +1,4 @@
 public interface ICardTrainPickupRule : ICardRule
 {
-    void OnTrainCardPickup(CardType _cardType);
+    void OnTrainCardPickup(ResourceType _type);
 }

@@ -55,11 +55,11 @@ public class CardRuleHandler : MonoBehaviour
         }
     }
 
-    private void HandleTrainCardPickup(CardType _cardType)
+    private void HandleTrainCardPickup(ResourceType _type)
     {
         foreach (ICardTrainPickupRule rule in m_trainPickupRulesCache)
         {
-            rule.OnTrainCardPickup(_cardType);
+            rule.OnTrainCardPickup(_type);
         }
     }
 }
