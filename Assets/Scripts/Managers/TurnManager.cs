@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Photon.Pun;
+using UnityEngine;
 
 public partial class TurnManager : NetworkedSingleton<TurnManager>
 {
     public event Action OnTurnOwnerChange;
-    public event Action OnTurnStart;
-    public event Action OnTurnEnd;
 
     private int m_turnOwnerViewId;
     private int m_turnIndex;
@@ -29,7 +28,7 @@ public partial class TurnManager : NetworkedSingleton<TurnManager>
         StartNextTurn();
     }
 
-    public void StartNextTurn()
+    private void StartNextTurn()
     {
         if (!PhotonNetwork.IsMasterClient) return;
 
@@ -40,19 +39,19 @@ public partial class TurnManager : NetworkedSingleton<TurnManager>
         List<PhotonView> playerList = PlayerManager.I.GetSpawnedPlayerPhotonViews();
 
         if (playerList.Count <= m_turnIndex)
+        {
             m_turnIndex = 0;
+        }
 
         SetTurnOwner(playerList[m_turnIndex]);
         m_turnIndex++;
-
-        OnTurnStart?.Invoke();
     }
 
     public void EndTurn()
     {
+        Debug.Log("Trying to end turn");
         if (!PhotonNetwork.IsMasterClient) return;
-
-        OnTurnEnd?.Invoke();
+        Debug.Log("Ending turn");
         StartNextTurn();
     }
 

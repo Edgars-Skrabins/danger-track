@@ -1,8 +1,7 @@
-using UnityEngine;
-
-public class ResourceBlocksTrainRule : MonoBehaviour, ICardPickupRule
+[UnityEngine.CreateAssetMenu(fileName = "ResourceBlocksTrainRule", menuName = "Rules/ResourceBlocksTrainRule")]
+public class ResourceBlocksTrainRule : CardPickupRuleBase
 {
-    public void OnCardPickup(ResourceType _resourceType, int _currentTurnPickedUpAmount, bool _pickedUpFromDeck = false)
+    public override void OnCardPickup(ResourceType _resourceType, int _currentTurnPickedUpAmount, bool _pickedUpFromDeck = false)
     {
         TurnManager.I.GetAllowedTurnActions().CanPickupTrainCards = false;
     }

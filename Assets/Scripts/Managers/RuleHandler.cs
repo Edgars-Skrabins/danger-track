@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CardRuleHandler : MonoBehaviour
+public class RuleHandler : MonoBehaviour
 {
     [SerializeField] private GameRulesSO m_gameRules;
 
@@ -18,11 +18,12 @@ public class CardRuleHandler : MonoBehaviour
 
     private void HandleCardPickup(ResourceType _resourceType, bool _pickedUpFromDeck)
     {
-        int pickedUpCount = TurnManager.I.GetCurrentTurnContext().GetPickedUpCardCount();
+        TurnContext currentContext = TurnManager.I.GetCurrentTurnContext();
+        int currentPickupAmount = currentContext.GetPickedUpCardCount();
 
         foreach (ICardPickupRule rule in m_gameRules.CardPickupRules)
         {
-            rule.OnCardPickup(_resourceType, pickedUpCount, _pickedUpFromDeck);
+            rule.OnCardPickup(_resourceType, currentPickupAmount, _pickedUpFromDeck);
         }
     }
 

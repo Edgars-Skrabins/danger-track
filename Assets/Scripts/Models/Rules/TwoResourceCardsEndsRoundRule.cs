@@ -1,8 +1,7 @@
-using UnityEngine;
-
-public class TwoResourceCardsEndsRoundRule : MonoBehaviour, ICardPickupRule
+[UnityEngine.CreateAssetMenu(fileName = "TwoResourceCardsEndsRoundRule", menuName = "Rules/TwoResourceCardsEndsRoundRule")]
+public class TwoResourceCardsEndsRoundRule : CardPickupRuleBase
 {
-    public void OnCardPickup(ResourceType _resourceType, int _currentTurnPickedUpAmount, bool _pickedUpFromDeck = false)
+    public override void OnCardPickup(ResourceType _resourceType, int _currentTurnPickedUpAmount, bool _pickedUpFromDeck = false)
     {
         if (_currentTurnPickedUpAmount >= 2)
         {

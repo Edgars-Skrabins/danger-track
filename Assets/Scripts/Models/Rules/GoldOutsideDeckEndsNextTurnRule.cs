@@ -1,8 +1,7 @@
-using UnityEngine;
-
-public class GoldOutsideDeckEndsNextTurnRule : MonoBehaviour, ICardPickupRule
+[UnityEngine.CreateAssetMenu(fileName = "GoldOutsideDeckEndsNextTurnRule", menuName = "Rules/GoldOutsideDeckEndsNextTurnRule")]
+public class GoldOutsideDeckEndsNextTurnRule : CardPickupRuleBase
 {
-    public void OnCardPickup(ResourceType _resourceType, int _currentTurnPickedUpAmount, bool _pickedUpFromDeck = false)
+    public override void OnCardPickup(ResourceType _resourceType, int _currentTurnPickedUpAmount, bool _pickedUpFromDeck = false)
     {
         if (_resourceType == ResourceType.Gold && !_pickedUpFromDeck)
         {

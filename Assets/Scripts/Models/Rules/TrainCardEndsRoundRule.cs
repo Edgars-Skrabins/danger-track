@@ -1,8 +1,7 @@
-using UnityEngine;
-
-public class TrainCardEndsRoundRule : MonoBehaviour, ICardTrainPickupRule
+[UnityEngine.CreateAssetMenu(fileName = "TrainCardEndsRoundRule", menuName = "Rules/TrainCardEndsRoundRule")]
+public class TrainCardEndsRoundRule : TrainCardPickupRuleBase
 {
-    public void OnTrainCardPickup(ResourceType _type)
+    public override void OnTrainCardPickup(ResourceType _type)
     {
         TurnManager.I.EndTurn();
     }

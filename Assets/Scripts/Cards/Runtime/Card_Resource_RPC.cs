@@ -38,8 +38,7 @@ public partial class Card_Resource
         if (playerView.TryGetComponent(out Player player))
             player.AddResource(m_resourceType, m_price);
 
-        GameEvents.RaiseCardPickup(m_resourceType,  false);
-
         RemoveCard();
+        CardPickupSystem.I.RaiseCardPickup(m_resourceType);
     }
 }
