@@ -41,8 +41,9 @@ public partial class Card_Train
         if (playerView.TryGetComponent(out Player player))
             player.AddResource(m_resourceType, m_price);
 
+        GameEvents.RaiseTrainCardPickup((CardType)m_resourceType);
+
         RemoveCard();
-        TurnManager.I.StartNextTurn();
     }
 
     [PunRPC]

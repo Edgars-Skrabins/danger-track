@@ -38,9 +38,8 @@ public partial class Card_Resource
         if (playerView.TryGetComponent(out Player player))
             player.AddResource(m_resourceType, m_price);
 
-        RemoveCard();
+        GameEvents.RaiseCardPickup(m_resourceType, pickedUpFromDeck: false);
 
-        if (m_resourceType == ResourceType.Gold)
-            TurnManager.I.StartNextTurn();
+        RemoveCard();
     }
 }

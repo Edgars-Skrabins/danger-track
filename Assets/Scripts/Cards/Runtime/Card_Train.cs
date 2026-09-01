@@ -25,11 +25,14 @@ public partial class Card_Train : Card
 
     protected override bool CanInteract(Player _interactor)
     {
-        throw new System.NotImplementedException();
+        if (!TurnManager.I.GetAllowedTurnActions().CanPickupTrainCards) return false;
+        return _interactor.GetResource(m_resourceType) >= m_price;
     }
 
     public override void AttemptInteract(Player _interactor)
     {
+        if (!CanInteract(_interactor)) return;
+
         if (_interactor.GetResource(m_resourceType) >= m_price)
         {
             _interactor.RemoveResource(m_resourceType, m_price);

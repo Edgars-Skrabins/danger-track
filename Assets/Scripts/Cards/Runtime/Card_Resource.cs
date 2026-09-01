@@ -22,10 +22,12 @@ public partial class Card_Resource : Card
 
     public override void HandleMouseOver() { }
 
-    protected override bool CanInteract(Player _interactor) => true;
+    protected override bool CanInteract(Player _interactor) => TurnManager.I.GetAllowedTurnActions().CanPickupResourceCards;
 
     public override void AttemptInteract(Player _interactor)
     {
+        if (!CanInteract(_interactor)) return;
+
         Interact(_interactor);
     }
 
