@@ -45,7 +45,6 @@ public partial class TurnManager : NetworkedSingleton<TurnManager>
 
     public void EndTurn()
     {
-        Debug.Log("Trying to end turn");
         if (!PhotonNetwork.IsMasterClient) return;
         Debug.Log("Ending turn");
         StartNextTurn();
