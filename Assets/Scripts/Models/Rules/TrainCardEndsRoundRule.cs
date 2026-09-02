@@ -1,4 +1,6 @@
-[UnityEngine.CreateAssetMenu(fileName = "TrainCardEndsRoundRule", menuName = "Rules/TrainCardEndsRoundRule")]
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "TrainCardEndsNextTurnRule", menuName = "Rules/TrainCardEndsNextTurnRule")]
 public class TrainCardEndsRoundRule : TrainCardPickupRuleBase
 {
     public override void OnTrainCardPickup(ResourceType _type)

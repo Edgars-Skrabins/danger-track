@@ -1,4 +1,6 @@
-[UnityEngine.CreateAssetMenu(fileName = "TwoResourceCardsEndsRoundRule", menuName = "Rules/TwoResourceCardsEndsRoundRule")]
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "TwoResourceCardsEndsNextTurnRule", menuName = "Rules/TwoResourceCardsEndsNextTurnRule")]
 public class TwoResourceCardsEndsRoundRule : CardPickupRuleBase
 {
     public override void OnCardPickup(ResourceType _resourceType, int _currentTurnPickedUpAmount, bool _pickedUpFromDeck = false)

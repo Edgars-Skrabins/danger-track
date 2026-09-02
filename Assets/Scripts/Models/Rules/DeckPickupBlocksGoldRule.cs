@@ -1,8 +1,9 @@
 using UnityEngine;
 
-public class DeckPickupBlocksGoldRule : MonoBehaviour, ICardPickupRule
+[CreateAssetMenu(fileName = "DeckPickupBlocksGoldRule", menuName = "Rules/DeckPickupBlocksGoldRule")]
+public class DeckPickupBlocksGoldRule : CardPickupRuleBase
 {
-    public void OnCardPickup(ResourceType _resourceType, int _currentTurnPickedUpAmount, bool _pickedUpFromDeck = false)
+    public override void OnCardPickup(ResourceType _resourceType, int _currentTurnPickedUpAmount, bool _pickedUpFromDeck = false)
     {
         if (_pickedUpFromDeck && TurnManager.I.GetCurrentTurnContext().GetPickedUpCardCount() == 1)
         {
