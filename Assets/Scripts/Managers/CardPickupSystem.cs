@@ -7,6 +7,11 @@ public class CardPickupSystem : NetworkedSingleton<CardPickupSystem>
         TurnContext currentContext = TurnManager.I.GetCurrentTurnContext();
         currentContext.AddPickedUpResourceCard();
 
+        if (_pickedUpFromDeck)
+        {
+            currentContext.SetPickedUpFromDeck(true);
+        }
+
         GameEvents.RaiseCardPickup(_resourceType, _pickedUpFromDeck);
     }
 }

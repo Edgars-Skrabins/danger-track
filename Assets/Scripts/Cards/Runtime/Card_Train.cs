@@ -25,7 +25,6 @@ public partial class Card_Train : Card
 
     protected override bool CanInteract(Player _interactor)
     {
-        if (!TurnManager.I.GetAllowedTurnActions().CanPickupTrainCards) return false;
         return _interactor.GetResource(m_resourceType) >= m_price;
     }
 

@@ -4,9 +4,9 @@ using System.Linq;
 using Photon.Pun;
 using UnityEngine;
 
-public abstract class Deck : MonoBehaviourPun
+public abstract class Deck : MonoBehaviourPun, IInteractable
 {
-    public event Action OnAllCardsPlaced;
+    public event System.Action OnAllCardsPlaced;
 
     [SerializeField] private Transform[] m_cardSlots;
     [SerializeField] private CardMaterialMapping[] m_cardMaterials;
@@ -40,6 +40,9 @@ public abstract class Deck : MonoBehaviourPun
     {
         return m_cardMaterials.First(x => x.type == _type).material;
     }
+
+    public virtual void HandleMouseOver() { }
+    public virtual void AttemptInteract(Player _interactor) { }
 }
 
 public abstract class Deck<TCard, TCardData, TDeckContent, TPool> : Deck
@@ -96,6 +99,12 @@ public abstract class Deck<TCard, TCardData, TDeckContent, TPool> : Deck
         return _slotIndex >= 0 &&
                _slotIndex < m_placedCards.Count &&
                m_placedCards[_slotIndex] != null;
+    }
+
+    protected TCardData GetTopCardFromDeck()
+    {
+        if (m_cardsInDeck.Count == 0) return null;
+        return m_cardsInDeck[0];
     }
 
     private void ClearSlot(int _slotIndex, TCardData _cardData)

@@ -22,7 +22,12 @@ public partial class Card_Resource : Card
 
     public override void HandleMouseOver() { }
 
-    protected override bool CanInteract(Player _interactor) => TurnManager.I.GetAllowedTurnActions().CanPickupResourceCards;
+    protected override bool CanInteract(Player _interactor)
+    {
+        if (TurnManager.I.GetCurrentTurnContext().GetPickedUpCardCount() >= 2) return false;
+        if (m_resourceType == ResourceType.Gold && !TurnManager.I.GetAllowedTurnActions().CanPickupGoldCardFromOutsideDeck) return false;
+        return true;
+    }
 
     public override void AttemptInteract(Player _interactor)
     {
