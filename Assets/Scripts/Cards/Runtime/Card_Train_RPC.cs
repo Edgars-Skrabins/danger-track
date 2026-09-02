@@ -18,8 +18,9 @@ public partial class Card_Train
         m_owningDeck.OnAllCardsPlaced += UpdateTaxStatus;
 
         m_originalPrice = _price;
-        m_price         = _price;
-        m_resourceType  = _type;
+        m_price = _price;
+
+        m_resourceType = _type;
 
         m_priceText.text = m_price.ToString();
 
@@ -39,7 +40,9 @@ public partial class Card_Train
         }
 
         if (playerView.TryGetComponent(out Player player))
-            player.AddResource(m_resourceType, m_price);
+        {
+            player.RemoveResource(m_resourceType, m_price);
+        }
         RemoveCard();
         GameEvents.RaiseTrainCardPickup(m_resourceType);
     }
@@ -47,7 +50,7 @@ public partial class Card_Train
     [PunRPC]
     private void UpdatePriceRPC(int _newPrice)
     {
-        m_price          = _newPrice;
+        m_price = _newPrice;
         m_priceText.text = m_price.ToString();
     }
 }

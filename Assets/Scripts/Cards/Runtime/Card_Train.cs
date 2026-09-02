@@ -34,7 +34,6 @@ public partial class Card_Train : Card
 
         if (_interactor.GetResource(m_resourceType) >= m_price)
         {
-            _interactor.RemoveResource(m_resourceType, m_price);
             Interact(_interactor);
         }
     }
