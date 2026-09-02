@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "TwoResourceCardsEndsNextTurnRule", menuName = "Rules/TwoResourceCardsEndsNextTurnRule")]
-public class TwoResourceCardsEndsRoundRule : CardPickupRuleBase
+[CreateAssetMenu(fileName = "TwoResourceCardsEndsTurnRule", menuName = "Rules/TwoResourceCardsEndsTurnRule")]
+public class TwoResourceCardsEndsTurnRule : CardPickupRuleBase
 {
     public override void OnCardPickup(ResourceType _resourceType, int _currentTurnPickedUpAmount, bool _pickedUpFromDeck = false)
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GoldOutsideDeckEndsNextTurnRule", menuName = "Rules/GoldOutsideDeckEndsNextTurnRule")]
-public class GoldOutsideDeckEndsNextTurnRule : CardPickupRuleBase
+[CreateAssetMenu(fileName = "GoldOutsideDeckEndsTurnRule", menuName = "Rules/GoldOutsideDeckEndsTurnRule")]
+public class GoldOutsideDeckEndsTurnRule : CardPickupRuleBase
 {
     public override void OnCardPickup(ResourceType _resourceType, int _currentTurnPickedUpAmount, bool _pickedUpFromDeck = false)
     {
