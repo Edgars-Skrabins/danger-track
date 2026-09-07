@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
@@ -19,7 +18,9 @@ public class PlayerManager : Singleton<PlayerManager>
     private void SpawnPlayer()
     {
         GameObject spawnedPlayer = PhotonNetwork.Instantiate(m_playerPrefab.name, transform.position, transform.rotation);
-        m_spawnedPlayerPhotonViews.Add(spawnedPlayer.GetComponent<PhotonView>());
+        PhotonView photonView = spawnedPlayer.GetComponent<PhotonView>();
+        m_spawnedPlayerPhotonViews.Add(photonView);
+        SeatManager.I.AssignSeat(photonView);
     }
 
     public void RegisterPlayer(PhotonView photonView)

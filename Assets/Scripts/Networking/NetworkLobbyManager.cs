@@ -1,9 +1,6 @@
-using System;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class NetworkLobbyManager : MonoBehaviourPunCallbacks
 {
