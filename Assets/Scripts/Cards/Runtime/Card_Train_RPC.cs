@@ -42,6 +42,7 @@ public partial class Card_Train
         if (playerView.TryGetComponent(out Player player))
         {
             player.RemoveResource(m_resourceType, m_price);
+            player.AddTrainCard(m_resourceType, m_originalPrice);
         }
         RemoveCard();
         GameEvents.RaiseTrainCardPickup(m_resourceType);
