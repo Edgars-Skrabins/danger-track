@@ -14,8 +14,8 @@ public partial class Card_Resource
             return;
         }
 
-        m_owningDeck   = deckView.GetComponent<Deck_Resource>();
-        m_price        = _price;
+        m_owningDeck = deckView.GetComponent<Deck_Resource>();
+        m_price = _price;
         m_resourceType = _type;
 
         m_priceText.text = m_price.ToString();
@@ -39,6 +39,6 @@ public partial class Card_Resource
             player.AddResource(m_resourceType, m_price);
 
         RemoveCard();
-        CardPickupSystem.I.RaiseCardPickup(m_resourceType);
+        CardPickupSystem.RaiseCardPickup(m_resourceType);
     }
 }

@@ -1,8 +1,6 @@
-using UnityEngine;
-
-public class CardPickupSystem : NetworkedSingleton<CardPickupSystem>
+public static class CardPickupSystem
 {
-    public void RaiseCardPickup(ResourceType _resourceType, bool _pickedUpFromDeck = false)
+    public static void RaiseCardPickup(ResourceType _resourceType, bool _pickedUpFromDeck = false)
     {
         TurnContext currentContext = TurnManager.I.GetCurrentTurnContext();
         currentContext.AddPickedUpResourceCard();

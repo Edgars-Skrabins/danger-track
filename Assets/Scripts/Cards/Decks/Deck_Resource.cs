@@ -37,6 +37,6 @@ public class Deck_Resource : Deck<Card_Resource, ResourceCardData, ResourceDeckC
 
         m_cardsInDeck.RemoveAt(0);
 
-        CardPickupSystem.I.RaiseCardPickup(_resourceType, true);
+        CardPickupSystem.RaiseCardPickup(_resourceType, true);
     }
 }
