@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3630537668452153381}
   - component: {fileID: 6922012501315466379}
+  - component: {fileID: 725532234530255572}
   m_Layer: 5
   m_Name: JoinRoomWidget
   m_TagString: Untagged
@@ -24,7 +25,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187095601843877157}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -64,6 +65,19 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &725532234530255572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187095601843877157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0772d714b337ec94780b79c4f3fd1ebb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  m_roomNameInputField: {fileID: 8168240988272736894}
 --- !u!1 &980641845731037292
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,19 +613,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1856206198073890209, guid: dfdb4e36b546e7947affd4d788ffe14f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1856206198073890209, guid: dfdb4e36b546e7947affd4d788ffe14f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 725532234530255572}
+    - target: {fileID: 1856206198073890209, guid: dfdb4e36b546e7947affd4d788ffe14f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: NavigateToMenu
+      value: JoinRoom
       objectReference: {fileID: 0}
     - target: {fileID: 1856206198073890209, guid: dfdb4e36b546e7947affd4d788ffe14f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MenuNavigationUI, Assembly-CSharp
+      value: JoinRoomWidgetUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1856206198073890209, guid: dfdb4e36b546e7947affd4d788ffe14f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: MenuUI, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2269874628058530441, guid: dfdb4e36b546e7947affd4d788ffe14f, type: 3}
       propertyPath: m_text
