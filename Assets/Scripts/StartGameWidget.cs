@@ -1,16 +1,15 @@
+using Photon.Pun;
 using UnityEngine;
 
 public class StartGameWidget : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void AttemptStartGame()
     {
-        
+        StartGame();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void StartGame()
     {
-        
+        PhotonNetwork.LoadLevel((int)Scenes.Game);
     }
 }
